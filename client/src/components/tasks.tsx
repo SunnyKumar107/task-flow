@@ -3,6 +3,7 @@
 import { useContext, useEffect, useState } from 'react'
 import { TasksContext } from '@/providers/task-provider'
 import { getTasks } from '@/services/task-service'
+import { toast } from 'sonner'
 
 import {
   Select,
@@ -12,6 +13,7 @@ import {
   SelectValue
 } from '@/components/ui/select'
 
+import Loader from './loader'
 import TaskCard from './task-card'
 
 function Tasks() {
@@ -26,7 +28,9 @@ function Tasks() {
         const res = await getTasks()
         setTasks(res.data.tasks)
       } catch (error) {
-        //toast
+        toast.error('Failed to fetch tasks!', {
+          description: 'Please try again.'
+        })
       } finally {
         setIsLoading(false)
       }
@@ -54,11 +58,15 @@ function Tasks() {
           </SelectContent>
         </Select>
       </div>
-      <div className='mt-8 flex flex-col items-center gap-3'>
-        {tasks.map(task => (
-          <TaskCard key={task.id} task={task} />
-        ))}
-      </div>
+      {isLoading ? (
+        <Loader size='md' />
+      ) : (
+        <div className='mt-8 flex flex-col items-center gap-3'>
+          {tasks.map(task => (
+            <TaskCard key={task.id} task={task} />
+          ))}
+        </div>
+      )}
     </div>
   )
 }

@@ -1,8 +1,20 @@
 import { Loader2Icon } from 'lucide-react'
 
-export default function Loader() {
+import { cn } from '@/lib/utils'
+
+interface LoaderProps {
+  size?: 'sm' | 'md' | 'lg'
+}
+
+export default function Loader({ size = 'lg' }: LoaderProps) {
   return (
-    <section className='flex h-[calc(100vh-6rem)] items-center justify-center'>
+    <section
+      className={cn('flex items-center justify-center', {
+        'h-[calc(100vh-6rem)]': size === 'lg',
+        'h-[calc(100vh-12rem)]': size === 'md',
+        'h-[calc(100vh-16rem)]': size === 'sm'
+      })}
+    >
       <Loader2Icon className='text-secondary h-10 w-10 animate-spin' />
     </section>
   )

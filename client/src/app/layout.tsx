@@ -6,6 +6,7 @@ import './globals.css'
 import { TaskProvider } from '@/providers/task-provider'
 import { ThemeProvider } from '@/providers/theme-provider'
 
+import { Toaster } from '@/components/ui/sonner'
 import Header from '@/components/header'
 
 const geistSans = Geist({
@@ -42,7 +43,8 @@ export default function RootLayout({
         >
           <TaskProvider>
             <Header />
-            {children}
+            <div className='mt-24 min-h-[calc(100vh-96px)]'>{children}</div>
+            <Toaster />
           </TaskProvider>
         </ThemeProvider>
       </body>

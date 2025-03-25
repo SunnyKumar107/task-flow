@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic'
 import { TaskForm, taskSchema } from '@/validators/task-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 
 import {
   Form,
@@ -45,10 +46,11 @@ function CreateTaskForm() {
 
       setTasks([res.data.task, ...tasks])
       form.reset({ title: '', description: '' })
-      //toast
+      toast.success('Task created successfully!')
     } catch (error) {
-      //toast
-      console.log('err', error)
+      toast.error('Task creation failed!', {
+        description: 'Please try again.'
+      })
     } finally {
       setIsSubmitting(false)
     }

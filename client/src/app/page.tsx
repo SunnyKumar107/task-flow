@@ -3,11 +3,11 @@ import Tasks from '@/components/tasks'
 
 export default function Home() {
   return (
-    <div className='flex min-h-[calc(100vh-96px)] w-full'>
-      <div className='h-full w-1/2'>
+    <div className='absolute flex h-full w-full'>
+      <div className='bg-background fixed top-24 left-0 h-full md:min-w-xl'>
         <CreateTaskForm />
       </div>
-      <div className='bg-background/10 border-foreground/30 flex-1 border-l px-8 py-6'>
+      <div className='bg-background/30 ml-[576px] flex-1 px-8 py-6'>
         <Tasks />
       </div>
     </div>

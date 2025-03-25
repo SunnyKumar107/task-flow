@@ -6,6 +6,7 @@ import { deleteTask, updateTask } from '@/services/task-service'
 import { CheckCheck, Dot, Ellipsis, Loader2Icon, Trash2 } from 'lucide-react'
 import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
+import { toast } from 'sonner'
 
 import { Task } from '@/types/task'
 import { cn, formatTimeAgo } from '@/lib/utils'
@@ -33,9 +34,11 @@ function TaskCard({ task }: { task: Task }) {
       setIsDeleting(true)
       const res = await deleteTask(task.id)
       setTasks(tasks.filter(task => task.id !== res.data.task.id))
-      //toast
+      toast.success('Task deleted successfully!')
     } catch (error) {
-      console.log('err', error)
+      toast.error('Task deletion failed!', {
+        description: 'Please try again.'
+      })
     } finally {
       setIsDeleting(false)
     }
@@ -49,9 +52,11 @@ function TaskCard({ task }: { task: Task }) {
       setTasks(
         tasks.map(task => (task.id === res.data.task.id ? res.data.task : task))
       )
-      //toast
+      toast.success('Task updated successfully!')
     } catch (error) {
-      //toast
+      toast.error('Task update failed!', {
+        description: 'Please try again.'
+      })
     } finally {
       setIsUpdating(false)
     }
@@ -70,7 +75,7 @@ function TaskCard({ task }: { task: Task }) {
           </DropdownMenuTrigger>
           <DropdownMenuContent className='p-2'>
             <button
-              className='mb-1 flex cursor-pointer items-center gap-2 text-sm'
+              className='mb-1 flex cursor-pointer items-center gap-2 text-sm outline-none'
               onClick={handleUpdateTask}
             >
               {isUpdating ? (
@@ -94,7 +99,7 @@ function TaskCard({ task }: { task: Task }) {
               )}
             </button>
             <button
-              className='flex cursor-pointer items-center gap-2 text-sm'
+              className='flex cursor-pointer items-center gap-2 text-sm outline-none'
               onClick={handleDeleteTask}
             >
               {isDeleting ? (
