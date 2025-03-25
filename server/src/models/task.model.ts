@@ -1,7 +1,6 @@
 import mongoose, { Schema, Document } from 'mongoose'
 
 export interface ITask extends Document {
-  id: string
   title: string
   description: string
   completed: boolean
@@ -9,7 +8,6 @@ export interface ITask extends Document {
 
 const taskSchema: Schema = new Schema(
   {
-    id: { type: String, required: true, unique: true },
     title: { type: String, required: true },
     description: { type: String, required: true },
     completed: { type: Boolean, default: false }

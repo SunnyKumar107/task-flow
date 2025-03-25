@@ -95,9 +95,28 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.quill > * {
+  @apply !text-foreground !border-none !font-sans;
+}
+.quill > .ql-toolbar {
+  @apply !rounded-t-lg;
+}
+
+.quill > .ql-container {
+  @apply !border-foreground/30 !rounded-b-lg;
+}
+
+.custom-quill .ql-toolbar {
+  @apply bg-background/60 rounded-t-lg text-white;
+}
+
+.custom-quill .ql-toolbar .ql-stroke {
+  stroke: var(--foreground);
 }
