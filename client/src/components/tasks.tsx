@@ -1,6 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { TasksContext } from '@/providers/task-provider'
+import { getTasks } from '@/services/task-service'
 
 import {
   Select,
@@ -10,26 +12,53 @@ import {
   SelectValue
 } from '@/components/ui/select'
 
+import TaskCard from './task-card'
+
 function Tasks() {
   const [taskType, setTaskType] = useState<string>('All')
+  const [isLoading, setIsLoading] = useState(false)
+  const { tasks, setTasks } = useContext(TasksContext)
+
+  useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        setIsLoading(true)
+        const res = await getTasks()
+        setTasks(res.data.tasks)
+      } catch (error) {
+        //toast
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    fetchTasks()
+  }, [taskType])
 
   const handleSelectChange = (value: string) => {
     setTaskType(value)
   }
 
   return (
-    <div className='flex items-center justify-between'>
-      <h1 className='text-secondary text-2xl font-medium'>Tasks</h1>
-      <Select onValueChange={handleSelectChange}>
-        <SelectTrigger className='w-[180px]'>
-          <SelectValue placeholder={taskType} />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value='All'>All</SelectItem>
-          <SelectItem value='Completed'>Completed</SelectItem>
-          <SelectItem value='Not Completed'>Not Completed</SelectItem>
-        </SelectContent>
-      </Select>
+    <div>
+      <div className='flex items-center justify-between'>
+        <h1 className='text-secondary text-2xl font-medium'>Tasks</h1>
+        <Select onValueChange={handleSelectChange}>
+          <SelectTrigger className='w-[180px]'>
+            <SelectValue placeholder={taskType} />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value='All'>All</SelectItem>
+            <SelectItem value='Completed'>Completed</SelectItem>
+            <SelectItem value='Not Completed'>Not Completed</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+      <div className='mt-8 flex flex-col items-center gap-3'>
+        {tasks.map(task => (
+          <TaskCard key={task.id} task={task} />
+        ))}
+      </div>
     </div>
   )
 }

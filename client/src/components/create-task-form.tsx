@@ -17,7 +17,8 @@ import { Input } from '@/components/ui/input'
 
 import 'react-quill-new/dist/quill.snow.css'
 
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import { TasksContext } from '@/providers/task-provider'
 import { createTask } from '@/services/task-service'
 
 import LoadingButton from './loading-button'
@@ -26,6 +27,7 @@ const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false })
 
 function CreateTaskForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const { tasks, setTasks } = useContext(TasksContext)
 
   const form = useForm<TaskForm>({
     resolver: zodResolver(taskSchema),
@@ -39,9 +41,9 @@ function CreateTaskForm() {
   const onSubmit = async (task: TaskForm) => {
     try {
       setIsSubmitting(true)
-      const newTask = await createTask(task)
+      const res = await createTask(task)
 
-      console.log('new', newTask)
+      setTasks([res.data.task, ...tasks])
       form.reset({ title: '', description: '' })
       //toast
     } catch (error) {

@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google'
 
 import './globals.css'
 
+import { TaskProvider } from '@/providers/task-provider'
 import { ThemeProvider } from '@/providers/theme-provider'
 
 import Header from '@/components/header'
@@ -39,8 +40,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Header />
-          {children}
+          <TaskProvider>
+            <Header />
+            {children}
+          </TaskProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -6,7 +6,7 @@ async function createTask(task: TaskData) {
 }
 
 async function getAllTasks() {
-  return await Task.find()
+  return await Task.find().sort({ createdAt: -1 })
 }
 
 async function getTaskById(id: string) {

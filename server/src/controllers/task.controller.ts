@@ -46,8 +46,8 @@ async function deleteOne(req: Request, res: Response, next: NextFunction) {
       throw new HttpError(404, 'task not found')
     }
 
-    await taskService.deleteTaskById(id)
-    res.status(204).json({ message: 'task deleted' })
+    const task = await taskService.deleteTaskById(id)
+    res.status(204).json({ message: 'task deleted', data: { task } })
   } catch (err) {
     next(err)
   }
@@ -56,7 +56,7 @@ async function deleteOne(req: Request, res: Response, next: NextFunction) {
 async function updateOne(req: Request, res: Response, next: NextFunction) {
   try {
     const { id } = req.params
-    const { title, description } = req.body
+    const { title, description, completed } = req.body
 
     const taskToUpdate = await taskService.getTaskById(id)
 
@@ -64,7 +64,7 @@ async function updateOne(req: Request, res: Response, next: NextFunction) {
       throw new HttpError(404, 'task not found')
     }
 
-    const task = await taskService.updateTaskById(id, { title, description })
+    const task = await taskService.updateTaskById(id, { title, description, completed })
     res.status(200).json({ message: 'task updated', data: { task } })
   } catch (err) {
     next(err)
