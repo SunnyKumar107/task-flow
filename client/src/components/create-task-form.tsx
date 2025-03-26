@@ -42,11 +42,12 @@ function CreateTaskForm() {
   const onSubmit = async (task: TaskForm) => {
     try {
       setIsSubmitting(true)
-      const task = await createTask(task)
+      const createdTask = await createTask(task)
 
-      setTasks([task, ...tasks])
+      setTasks([createdTask, ...tasks])
       form.reset({ title: '', description: '' })
       toast.success('Task created successfully!')
+      window.scrollTo(0, 0)
     } catch (error) {
       toast.error('Task creation failed!', {
         description: 'Please try again.'

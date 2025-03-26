@@ -23,18 +23,18 @@ import ManageTask from './manage-task'
 
 function TaskCard({ task }: { task: Task }) {
   return (
-    <Link href={`/tasks/${task.id}`} className='w-full'>
       <Card className='w-full border-none'>
         <CardHeader className='flex items-center justify-between'>
-          <CardTitle>{task.title}</CardTitle>
+    <Link href={`/tasks/${task.id}`}><CardTitle>{task.title}</CardTitle></Link>
           <ManageTask task={task} />
         </CardHeader>
         <CardContent>
-          <article className='text-muted-foreground line-clamp-3 text-sm'>
+        <Link href={`/tasks/${task.id}`}>
+          <article className='text-muted-foreground line-clamp-3 text-sm max-w-4/5'>
             <ReactMarkdown rehypePlugins={[rehypeRaw]}>
               {task.description}
             </ReactMarkdown>
-          </article>
+          </article></Link>
         </CardContent>
         <CardFooter className='flex items-center gap-2'>
           <div
@@ -54,7 +54,6 @@ function TaskCard({ task }: { task: Task }) {
           </div>
         </CardFooter>
       </Card>
-    </Link>
   )
 }
 

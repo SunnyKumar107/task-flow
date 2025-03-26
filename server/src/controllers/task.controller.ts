@@ -53,7 +53,7 @@ async function deleteOne(req: Request, res: Response, next: NextFunction) {
     }
 
     const task = await taskService.deleteTaskById(id)
-    res.status(204).json({ message: 'task deleted', data: { task } })
+    res.status(200).json({ message: 'task deleted', data: { task } })
   } catch (err) {
     next(err)
   }
