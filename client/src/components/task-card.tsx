@@ -22,13 +22,13 @@ function TaskCard({ task }: { task: Task }) {
     <Card className='w-full border-none'>
       <CardHeader className='flex items-center justify-between'>
         <Link href={`/tasks/${task.id}`}>
-          <CardTitle>{task.title}</CardTitle>
+          <CardTitle className='line-clamp-2'>{task.title}</CardTitle>
         </Link>
         <ManageTask task={task} />
       </CardHeader>
       <CardContent>
         <Link href={`/tasks/${task.id}`}>
-          <article className='text-muted-foreground line-clamp-3 max-w-4/5 text-sm'>
+          <article className='text-muted-foreground line-clamp-3 text-sm'>
             <ReactMarkdown rehypePlugins={[rehypeRaw]}>
               {task.description}
             </ReactMarkdown>

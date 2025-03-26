@@ -87,7 +87,7 @@ function CreateTaskForm() {
                 <FormControl>
                   <ReactQuill
                     {...field}
-                    className='custom-quill bg-input/30 border-input h-[16rem] rounded-lg border text-base'
+                    className='custom-quill bg-input/30 border-input h-[16rem] rounded-lg border'
                   />
                 </FormControl>
                 <FormMessage />
@@ -95,12 +95,12 @@ function CreateTaskForm() {
             )}
           />
 
-          <div className='mt-6 text-center'>
+          <div className='mt-12 text-center'>
             <LoadingButton
               type='submit'
               loading={isSubmitting}
               text='Create New Task'
-              className='w-full'
+              className='w-full py-5'
             />
           </div>
         </form>

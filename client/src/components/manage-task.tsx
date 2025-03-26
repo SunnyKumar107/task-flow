@@ -71,7 +71,7 @@ function ManageTask({ task }: { task: Task }) {
       </DropdownMenuTrigger>
       <DropdownMenuContent className='p-2'>
         <button
-          className='mb-1 flex cursor-pointer items-center gap-2 text-sm outline-none'
+          className='mb-2 flex cursor-pointer items-center gap-2 text-sm outline-none'
           onClick={handleUpdateTask}
         >
           {isUpdating ? (
