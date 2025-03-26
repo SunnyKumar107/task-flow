@@ -1,6 +1,6 @@
 # Task Flow
 
-This is a **Task Management Application** built with a **Next.js** frontend and a **Node.js + Express.js** backend. It provides a simple and efficient way to manage tasks with CRUD (Create, Read, Update, Delete) operations.
+This is a **Task Flow Application** built with a **Next.js** frontend and a **Node.js + Express.js** backend. It provides a simple and efficient way to manage tasks with CRUD (Create, Read, Update, Delete) operations.
 
 ## Live Demo
 
@@ -46,7 +46,7 @@ You can view the live version of the application at:
 
 ## Screenshots
 
-![Task Flow Interface](./client/public/task-flow-screenshot.png)
+![Task Flow Interface](./public/task-flow-screenshot.png)
 
 ## Folder Structure
 
