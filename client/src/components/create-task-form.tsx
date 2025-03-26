@@ -95,7 +95,7 @@ function CreateTaskForm() {
             )}
           />
 
-          <div className='mt-12 text-center'>
+          <div className='mt-12 pb-6 text-center'>
             <LoadingButton
               type='submit'
               loading={isSubmitting}
