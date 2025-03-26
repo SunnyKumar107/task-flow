@@ -6,7 +6,7 @@ This is a **Task Management Application** built with a **Next.js** frontend and 
 
 You can view the live version of the application at:
 
-[Live URL]()
+[Live URL](https://task-flow-1.vercel.app/)
 
 ## Features
 
@@ -46,7 +46,7 @@ You can view the live version of the application at:
 
 ## Screenshots
 
-![Task Flow Interface](./public/task-flow-screenshot.png)
+![Task Flow Interface](./client/public/task-flow-screenshot.png)
 
 ## Folder Structure
 

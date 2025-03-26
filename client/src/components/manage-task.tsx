@@ -32,7 +32,7 @@ function ManageTask({ task }: { task: Task }) {
       if (pathname.startsWith('/tasks')) {
         router.push('/')
       }
-    } catch (error) {
+    } catch {
       toast.error('Task deletion failed!', {
         description: 'Please try again.'
       })
@@ -52,7 +52,7 @@ function ManageTask({ task }: { task: Task }) {
         tasks.map(task => (task.id === updatedTask.id ? updatedTask : task))
       )
       toast.success('Task updated successfully!')
-    } catch (error) {
+    } catch {
       toast.error('Task update failed!', {
         description: 'Please try again.'
       })

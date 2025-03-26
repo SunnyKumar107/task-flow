@@ -28,7 +28,7 @@ function Tasks() {
         setIsLoading(true)
         const tasks = await getTasks()
         setTasks(tasks)
-      } catch (error) {
+      } catch {
         toast.error('Failed to fetch tasks!', {
           description: 'Please try again.'
         })
@@ -55,7 +55,7 @@ function Tasks() {
         const tasks = await getTasks()
         setTasks(tasks)
       }
-    } catch (error) {
+    } catch {
       toast.error('Failed to fetch tasks!', {
         description: 'Please try again.'
       })

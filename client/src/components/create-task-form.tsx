@@ -48,7 +48,7 @@ function CreateTaskForm() {
       form.reset({ title: '', description: '' })
       toast.success('Task created successfully!')
       window.scrollTo(0, 0)
-    } catch (error) {
+    } catch {
       toast.error('Task creation failed!', {
         description: 'Please try again.'
       })
