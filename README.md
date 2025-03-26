@@ -166,7 +166,7 @@ Make sure you have the following installed:
 
 ```bash
 
-git clone <repository-url>
+git clone https://github.com/SunnyKumar107/task-flow
 
 cd task-flow
 
@@ -220,7 +220,7 @@ npm install
 
 #### 3. Configure environment variables
 
-- Create a `.env` file inside the `server/` folder
+- Create a `.env` file inside the `client/` folder
 
 - Add the following:
 
