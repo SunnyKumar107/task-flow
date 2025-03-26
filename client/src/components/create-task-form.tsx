@@ -42,9 +42,9 @@ function CreateTaskForm() {
   const onSubmit = async (task: TaskForm) => {
     try {
       setIsSubmitting(true)
-      const res = await createTask(task)
+      const task = await createTask(task)
 
-      setTasks([res.data.task, ...tasks])
+      setTasks([task, ...tasks])
       form.reset({ title: '', description: '' })
       toast.success('Task created successfully!')
     } catch (error) {

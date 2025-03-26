@@ -12,9 +12,15 @@ async function createNew(req: Request, res: Response, next: NextFunction) {
   }
 }
 
-async function getAll(_req: Request, res: Response, next: NextFunction) {
+async function getAll(req: Request, res: Response, next: NextFunction) {
+  const type = req.query.type
   try {
-    const tasks = await taskService.getAllTasks()
+    let tasks
+    if (type && typeof type === 'string') {
+      tasks = await taskService.getAllTasks(type)
+    } else {
+      tasks = await taskService.getAllTasks()
+    }
     res.status(200).json({ message: 'tasks fetched', total: tasks.length, data: { tasks } })
   } catch (err) {
     next(err)

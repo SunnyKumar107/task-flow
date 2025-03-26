@@ -5,7 +5,14 @@ async function createTask(task: TaskData) {
   return await Task.create(task)
 }
 
-async function getAllTasks() {
+async function getAllTasks(type?: string) {
+  if (type && type === 'completed') {
+    return await Task.find({ completed: true }).sort({ createdAt: -1 })
+  }
+
+  if (type && type === 'not-completed') {
+    return await Task.find({ completed: false }).sort({ createdAt: -1 })
+  }
   return await Task.find().sort({ createdAt: -1 })
 }
 

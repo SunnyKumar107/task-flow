@@ -25,8 +25,8 @@ function Tasks() {
     const fetchTasks = async () => {
       try {
         setIsLoading(true)
-        const res = await getTasks()
-        setTasks(res.data.tasks)
+        const tasks = await getTasks()
+        setTasks(tasks)
       } catch (error) {
         toast.error('Failed to fetch tasks!', {
           description: 'Please try again.'
@@ -37,10 +37,30 @@ function Tasks() {
     }
 
     fetchTasks()
-  }, [taskType])
+  }, [])
 
-  const handleSelectChange = (value: string) => {
+  const handleSelectChange = async (value: string) => {
     setTaskType(value)
+
+    try {
+      setIsLoading(true)
+      if (value === 'Completed') {
+        const tasks = await getTasks('completed')
+        setTasks(tasks)
+      } else if (value === 'Not Completed') {
+        const tasks = await getTasks('not-completed')
+        setTasks(tasks)
+      } else {
+        const tasks = await getTasks()
+        setTasks(tasks)
+      }
+    } catch (error) {
+      toast.error('Failed to fetch tasks!', {
+        description: 'Please try again.'
+      })
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -48,13 +68,19 @@ function Tasks() {
       <div className='flex items-center justify-between'>
         <h1 className='text-secondary text-2xl font-medium'>Tasks</h1>
         <Select onValueChange={handleSelectChange}>
-          <SelectTrigger className='w-[180px]'>
+          <SelectTrigger className='w-[160px] cursor-pointer'>
             <SelectValue placeholder={taskType} />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value='All'>All</SelectItem>
-            <SelectItem value='Completed'>Completed</SelectItem>
-            <SelectItem value='Not Completed'>Not Completed</SelectItem>
+            <SelectItem className='cursor-pointer' value='All'>
+              All
+            </SelectItem>
+            <SelectItem className='cursor-pointer' value='Completed'>
+              Completed
+            </SelectItem>
+            <SelectItem className='cursor-pointer' value='Not Completed'>
+              Not Completed
+            </SelectItem>
           </SelectContent>
         </Select>
       </div>
